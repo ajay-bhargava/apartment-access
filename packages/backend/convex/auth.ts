@@ -31,12 +31,3 @@ function createAuth(ctx: GenericCtx<DataModel>) {
 }
 
 export { createAuth };
-
-export const getCurrentUser = query({
-	args: {},
-	returns: v.any(),
-	handler: async (ctx) => {
-		// @ts-expect-error - getAuthUser accepts query context
-		return authComponent.getAuthUser(ctx);
-	},
-});
