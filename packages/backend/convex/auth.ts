@@ -1,7 +1,6 @@
 import { createClient, type GenericCtx } from "@convex-dev/better-auth";
 import { convex } from "@convex-dev/better-auth/plugins";
 import { betterAuth } from "better-auth";
-import { v } from "convex/values";
 
 import { components } from "./_generated/api";
 import type { DataModel } from "./_generated/dataModel";
@@ -29,5 +28,19 @@ function createAuth(ctx: GenericCtx<DataModel>) {
 		],
 	});
 }
+
+export const getCurrentUser = query({
+	args: {},
+	handler: async (ctx) => {
+		const identity = await ctx.auth.getUserIdentity();
+		if (identity === null) {
+			return null;
+		}
+		return {
+			name: identity.name ?? null,
+			email: identity.email ?? null,
+		};
+	},
+});
 
 export { createAuth };
