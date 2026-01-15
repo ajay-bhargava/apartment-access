@@ -8,6 +8,7 @@ import { query } from "./_generated/server";
 import authConfig from "./auth.config";
 
 const siteUrl = process.env.SITE_URL ?? "";
+const ADMIN_EMAIL = "bhargava.ajay@gmail.com";
 
 export const authComponent = createClient<DataModel>(components.betterAuth);
 
@@ -26,6 +27,9 @@ function createAuth(ctx: GenericCtx<DataModel>) {
 				jwksRotateOnTokenGenerationError: true,
 			}),
 		],
+		denySignUp: async ({ email }: { email: string }) => {
+			return email !== ADMIN_EMAIL;
+		},
 	});
 }
 

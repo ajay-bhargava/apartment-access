@@ -19,6 +19,7 @@ import {
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import SignInForm from "@/components/sign-in-form";
+import SignUpForm from "@/components/sign-up-form";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -215,10 +216,16 @@ function AdminContent() {
 }
 
 function SignInPage() {
+	const [showSignIn, setShowSignIn] = useState(true);
+
 	return (
 		<div className="flex min-h-screen items-center justify-center bg-background">
 			<Card className="w-full max-w-md p-8">
-				<SignInForm onSwitchToSignUp={() => {}} />
+				{showSignIn ? (
+					<SignInForm onSwitchToSignUp={() => setShowSignIn(false)} redirectTo="/admin" />
+				) : (
+					<SignUpForm onSwitchToSignIn={() => setShowSignIn(true)} />
+				)}
 				<div className="mt-4 text-center">
 					<Link href="/">
 						<Button variant="ghost" size="sm">

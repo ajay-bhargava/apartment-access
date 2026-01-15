@@ -7,8 +7,7 @@
 		"source.fixAll.biome": "explicit"
 	},
 	"editor.defaultFormatter": "biomejs.biome",
-	"editor.rulers": [80, 120],
-	"editor.tabSize": 2,
+	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
 	"editor.detectIndentation": false,
 
@@ -89,7 +88,6 @@
 
 	// Biome extension settings
 	"biome.enabled": true,
-	"biome.lspBin": null,
 
 	// General file settings
 	"files.trimTrailingWhitespace": true,
