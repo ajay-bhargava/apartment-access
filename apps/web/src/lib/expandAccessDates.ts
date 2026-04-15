@@ -36,8 +36,8 @@ export function expandAccessDates(
 	const accessMap = new Map<string, AccessDateInfo>();
 
 	config.blocks.forEach((block) => {
-		const start = new Date(block.startDate);
-		const end = new Date(block.endDate);
+		const start = new Date(`${block.startDate}T00:00:00`);
+		const end = new Date(`${block.endDate}T00:00:00`);
 
 		const days = eachDayOfInterval({ start, end });
 
