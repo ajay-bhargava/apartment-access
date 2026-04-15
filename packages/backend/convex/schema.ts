@@ -19,6 +19,7 @@ export default defineSchema({
 				type: v.literal("access"),
 				notes: v.optional(v.string()),
 				includeSundays: v.optional(v.boolean()),
+				entryWindows: v.optional(v.array(v.string())),
 			}),
 		),
 	}),

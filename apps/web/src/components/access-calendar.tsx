@@ -146,12 +146,12 @@ export function AccessCalendar({ config, accessDateMap }: AccessCalendarProps) {
 												<p className="mb-2">
 													Crew may enter up to{" "}
 													<span className="font-semibold text-foreground">
-														{config.rules.entriesPerAccessDay} times
+														{accessInfo.entriesAllowed} times
 													</span>
 													:
 												</p>
 												<ul className="list-inside list-disc space-y-1">
-													{config.rules.entryWindows.map((window) => (
+													{accessInfo.entryWindows.map((window) => (
 														<li key={window} className="capitalize">
 															{window}
 														</li>

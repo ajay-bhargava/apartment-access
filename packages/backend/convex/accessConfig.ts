@@ -9,6 +9,7 @@ const accessBlockValidator = v.object({
 	type: v.literal("access"),
 	notes: v.optional(v.string()),
 	includeSundays: v.optional(v.boolean()),
+	entryWindows: v.optional(v.array(v.string())),
 });
 
 const accessConfigValidator = v.object({
@@ -107,6 +108,33 @@ export const initializeDefault = mutation({
 					endDate: "2026-03-11",
 					type: "access" as const,
 					notes: "Access every working day for 17 straight working days, until facade work is complete. Crew may enter/exit morning, midday, and end-of-day. Continues from Drop N5 end date with no gap (Feb 20 overlap).",
+				},
+				{
+					id: "scaffold-demob",
+					title: "Scaffold Demobilization",
+					startDate: "2026-04-13",
+					endDate: "2026-04-15",
+					type: "access" as const,
+					notes: "Mon–Wed only. Access at 12:00 PM, 1:00 PM, and 4:30 PM.",
+					entryWindows: ["12:00 PM", "1:00 PM", "4:30 PM"],
+				},
+				{
+					id: "demobilization",
+					title: "Demobilization",
+					startDate: "2026-04-20",
+					endDate: "2026-04-22",
+					type: "access" as const,
+					notes: "Mon–Wed only. Access at 12:00 PM, 1:00 PM, and 4:30 PM.",
+					entryWindows: ["12:00 PM", "1:00 PM", "4:30 PM"],
+				},
+				{
+					id: "punch-list-cleanup",
+					title: "Access for Punch List & Clean Up",
+					startDate: "2026-04-27",
+					endDate: "2026-04-29",
+					type: "access" as const,
+					notes: "Mon–Wed only. Access at 12:00 PM, 1:00 PM, and 4:30 PM.",
+					entryWindows: ["12:00 PM", "1:00 PM", "4:30 PM"],
 				},
 			],
 		};

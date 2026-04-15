@@ -8,6 +8,7 @@ export interface AccessBlock {
 	type: "access";
 	notes?: string;
 	includeSundays?: boolean;
+	entryWindows?: string[];
 }
 
 export interface AccessConfig {
@@ -66,8 +67,8 @@ export function expandAccessDates(
 				blockId: block.id,
 				title: block.title,
 				notes: block.notes,
-				entriesAllowed: config.rules.entriesPerAccessDay,
-				entryWindows: config.rules.entryWindows,
+				entriesAllowed: block.entryWindows?.length ?? config.rules.entriesPerAccessDay,
+				entryWindows: block.entryWindows ?? config.rules.entryWindows,
 			});
 		});
 	});
