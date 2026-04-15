@@ -12,6 +12,7 @@ const AccessBlockSchema = z.object({
 	type: z.literal("access"),
 	notes: z.string().optional(),
 	includeSundays: z.boolean().optional(),
+	entryWindows: z.array(z.string()).optional(),
 });
 
 const AccessConfigSchema = z.object({
