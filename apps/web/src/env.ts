@@ -7,7 +7,7 @@ export const env = createEnv({
 	 * These are only available on the server.
 	 */
 	server: {
-		ANTHROPIC_API_KEY: z.string().min(1, "ANTHROPIC_API_KEY is required"),
+		ANTHROPIC_API_KEY: z.string().min(1).optional(),
 		ANTHROPIC_MODEL: z.string().min(1).default("claude-sonnet-4-6"),
 	},
 

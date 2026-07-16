@@ -106,6 +106,10 @@ Examples of questions you might receive:
 export async function POST(req: Request) {
 	const { messages, config, sessionId } = await req.json();
 
+	if (!env.ANTHROPIC_API_KEY) {
+		return new Response("Missing ANTHROPIC_API_KEY", { status: 500 });
+	}
+
 	if (!config) {
 		return new Response("Missing config", { status: 400 });
 	}
