@@ -9,6 +9,8 @@ export const env = createEnv({
 	server: {
 		ANTHROPIC_API_KEY: z.string().min(1).optional(),
 		ANTHROPIC_MODEL: z.string().min(1).default("claude-sonnet-4-6"),
+		OPENAI_API_KEY: z.string().min(1).optional(),
+		OPENAI_MODEL: z.string().min(1).default("gpt-4o-mini"),
 	},
 
 	/**
@@ -31,6 +33,8 @@ export const env = createEnv({
 	runtimeEnv: {
 		ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
 		ANTHROPIC_MODEL: process.env.ANTHROPIC_MODEL,
+		OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+		OPENAI_MODEL: process.env.OPENAI_MODEL,
 		NEXT_PUBLIC_CONVEX_URL: process.env.NEXT_PUBLIC_CONVEX_URL,
 		NEXT_PUBLIC_CONVEX_SITE_URL: process.env.NEXT_PUBLIC_CONVEX_SITE_URL,
 	},

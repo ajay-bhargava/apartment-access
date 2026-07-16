@@ -1,4 +1,5 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
+import { createOpenAI } from "@ai-sdk/openai";
 import { api } from "@apartment-access/backend/convex/_generated/api";
 import { type CoreMessage, streamText } from "ai";
 import { ConvexHttpClient } from "convex/browser";
@@ -7,6 +8,10 @@ import { env } from "@/env";
 
 const anthropic = createAnthropic({
 	apiKey: env.ANTHROPIC_API_KEY,
+});
+
+const openai = createOpenAI({
+	apiKey: env.OPENAI_API_KEY,
 });
 
 interface UIMessage {
@@ -106,8 +111,8 @@ Examples of questions you might receive:
 export async function POST(req: Request) {
 	const { messages, config, sessionId } = await req.json();
 
-	if (!env.ANTHROPIC_API_KEY) {
-		return new Response("Missing ANTHROPIC_API_KEY", { status: 500 });
+	if (!env.ANTHROPIC_API_KEY && !env.OPENAI_API_KEY) {
+		return new Response("Missing AI provider API key", { status: 500 });
 	}
 
 	if (!config) {
@@ -127,8 +132,12 @@ export async function POST(req: Request) {
 	const lastUserMessage = modelMessages.filter((m) => m.role === "user").pop();
 	const userMessageText = (lastUserMessage?.content as string) || "";
 
+	const model = env.ANTHROPIC_API_KEY
+		? anthropic(env.ANTHROPIC_MODEL)
+		: openai(env.OPENAI_MODEL);
+
 	const result = await streamText({
-		model: anthropic(env.ANTHROPIC_MODEL),
+		model,
 		system: systemPrompt,
 		messages: modelMessages,
 		onFinish: async ({ text }) => {
