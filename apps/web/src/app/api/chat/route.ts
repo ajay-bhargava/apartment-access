@@ -1,12 +1,12 @@
+import { createAnthropic } from "@ai-sdk/anthropic";
 import { api } from "@apartment-access/backend/convex/_generated/api";
-import { createOpenAI } from "@ai-sdk/openai";
 import { type CoreMessage, streamText } from "ai";
 import { ConvexHttpClient } from "convex/browser";
 import { format } from "date-fns";
 import { env } from "@/env";
 
-const openai = createOpenAI({
-	apiKey: env.OPENAI_API_KEY,
+const anthropic = createAnthropic({
+	apiKey: env.ANTHROPIC_API_KEY,
 });
 
 interface UIMessage {
@@ -124,7 +124,7 @@ export async function POST(req: Request) {
 	const userMessageText = (lastUserMessage?.content as string) || "";
 
 	const result = await streamText({
-		model: openai("gpt-4o-mini"),
+		model: anthropic(env.ANTHROPIC_MODEL),
 		system: systemPrompt,
 		messages: modelMessages,
 		onFinish: async ({ text }) => {

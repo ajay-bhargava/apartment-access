@@ -7,7 +7,8 @@ export const env = createEnv({
 	 * These are only available on the server.
 	 */
 	server: {
-		OPENAI_API_KEY: z.string().min(1, "OPENAI_API_KEY is required"),
+		ANTHROPIC_API_KEY: z.string().min(1, "ANTHROPIC_API_KEY is required"),
+		ANTHROPIC_MODEL: z.string().min(1).default("claude-sonnet-4-6"),
 	},
 
 	/**
@@ -28,7 +29,8 @@ export const env = createEnv({
 	 * These are used to destructure the environment variables at runtime.
 	 */
 	runtimeEnv: {
-		OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+		ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
+		ANTHROPIC_MODEL: process.env.ANTHROPIC_MODEL,
 		NEXT_PUBLIC_CONVEX_URL: process.env.NEXT_PUBLIC_CONVEX_URL,
 		NEXT_PUBLIC_CONVEX_SITE_URL: process.env.NEXT_PUBLIC_CONVEX_SITE_URL,
 	},
